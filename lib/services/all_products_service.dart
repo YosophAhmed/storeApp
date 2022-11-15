@@ -15,6 +15,7 @@ class AllProductsService {
         ProductModel.fromJson(data[i]),
       );
     }
+
     return productsList;
   }
 }
