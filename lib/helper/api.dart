@@ -33,6 +33,12 @@ class Api {
       body: body,
       headers: headers,
     );
-    return jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception(
+        'Status Code Problem ${response.statusCode} with body ${jsonDecode(response.body)}',
+      );
+    }
   }
 }
