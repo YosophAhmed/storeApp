@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:http/http.dart' as http;
+import 'package:store/pages/home_page.dart';
 
 void main() {
   runApp(const StoreApp());
@@ -15,16 +15,10 @@ class StoreApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-
-              },
-              child: const Icon(
-                Icons.add,
-              ),
-            ),
-          ),
+          initialRoute: HomePage.routeName,
+          routes: {
+            HomePage.routeName : (context) => const HomePage(),
+          },
         );
       },
     );
