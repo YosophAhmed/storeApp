@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:store/models/product_model.dart';
+import '../services/all_products_service.dart';
 import '../widgets/custom_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,15 +42,27 @@ class HomePage extends StatelessWidget {
           right: 4.w,
           top: 12.h,
         ),
-        child: GridView.builder(
-          clipBehavior: Clip.none,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.4,
-            mainAxisSpacing: 13.h,
-            crossAxisSpacing: 2.w,
-          ),
-          itemBuilder: (context, index) => const CustomCard(),
+        child: FutureBuilder<List<ProductModel>>(
+          future: AllProductsService().getAllProducts(),
+          builder: (context, snapshot){
+            if(snapshot.hasData)
+              {
+                List<ProductModel> products = snapshot.data!;
+                return GridView.builder(
+                  clipBehavior: Clip.none,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.4,
+                    mainAxisSpacing: 13.h,
+                    crossAxisSpacing: 2.w,
+                  ),
+                  itemBuilder: (context, index) => const CustomCard(),
+                  itemCount: products.length,
+                );
+              } else {
+              return  const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
     );
