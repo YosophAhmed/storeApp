@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomCard extends StatelessWidget {
+
+
   const CustomCard({Key? key}) : super(key: key);
 
   @override
