@@ -15,8 +15,12 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, UpdateProductPage.routeName);
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          UpdateProductPage.routeName,
+          arguments: product,
+        );
       },
       child: Stack(
         clipBehavior: Clip.none,
@@ -44,7 +48,7 @@ class CustomCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title.substring(0,10),
+                      product.title.substring(0, 10),
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.sp,
