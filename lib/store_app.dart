@@ -14,7 +14,7 @@ class StoreApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             HomePage.routeName: (context) => const HomePage(),
-            UpdateProductPage.routeName: (context) => const UpdateProductPage()
+            UpdateProductPage.routeName: (context) => UpdateProductPage(),
           },
           initialRoute: HomePage.routeName,
         );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
 
   final String? hintText;
   final IconData? suffix;
@@ -14,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onSubmitted;
   final void Function()? suffixFunction;
 
-  const CustomTextFormField({
+  const CustomTextField({
     Key? key,
     this.hintText,
     this.obscure = false,
@@ -35,12 +35,6 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscure!,
       onChanged: onChanged,
       onFieldSubmitted: onSubmitted,
-      validator: (data) {
-        if(data!.isEmpty){
-          return 'field is required!';
-        }
-        return null;
-      },
       decoration: InputDecoration(
         hintText: hintText,
         border: OutlineInputBorder(
