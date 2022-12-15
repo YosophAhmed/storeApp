@@ -55,7 +55,9 @@ class HomePage extends StatelessWidget {
                   mainAxisSpacing: 13.h,
                   crossAxisSpacing: 2.w,
                 ),
-                itemBuilder: (context, index) => const CustomCard(),
+                itemBuilder: (context, index) => CustomCard(
+                    product: products[index],
+                ),
                 itemCount: products.length,
               );
             } else {
