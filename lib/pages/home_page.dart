@@ -1,23 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:store/models/product_model.dart';
-import '../services/all_products_service.dart';
-import '../widgets/custom_card.dart';
+import 'package:store/pages/jewelery_page.dart';
+import 'package:store/pages/mens_clothing_page.dart';
+import 'package:store/pages/womens_clothing_page.dart';
+import '../services/all_categories_service.dart';
+import '../widgets/category_item.dart';
+import 'electronics_page.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = 'HomePage';
 
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Function()> function = [
+      () {
+        Navigator.pushNamed(
+          context,
+          ElectronicsPage.routeName,
+        );
+      },
+      () {
+        Navigator.pushNamed(
+          context,
+          JeweleryPage.routeName,
+        );
+      },
+      () {
+        Navigator.pushNamed(
+          context,
+          MenClothingPage.routeName,
+        );
+      },
+      () {
+        Navigator.pushNamed(
+          context,
+          WomenClothingPage.routeName,
+        );
+      },
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: Text(
-          'New Trend',
+          'Shopping',
           style: TextStyle(
             color: Colors.black,
             fontSize: 24.sp,
@@ -30,7 +59,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {},
             icon: Icon(
               Icons.shopping_cart,
-              color: Colors.black,
+              color: Colors.grey,
               size: 24.sp,
             ),
           ),
@@ -40,25 +69,27 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.only(
           left: 4.w,
           right: 4.w,
-          top: 12.h,
+          top: 15.h,
+          bottom: 10.h,
         ),
-        child: FutureBuilder<List<ProductModel>>(
-          future: AllProductsService().getAllProducts(),
+        child: FutureBuilder<List<dynamic>>(
+          future: AllCategoriesService().getAllCategories(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<ProductModel> products = snapshot.data!;
+              List<dynamic> category = snapshot.data!;
               return GridView.builder(
                 clipBehavior: Clip.none,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.4,
-                  mainAxisSpacing: 13.h,
-                  crossAxisSpacing: 2.w,
+                  childAspectRatio: 1.2,
+                  mainAxisSpacing: 4.h,
+                  crossAxisSpacing: 4.w,
                 ),
-                itemBuilder: (context, index) => CustomCard(
-                    product: products[index],
+                itemBuilder: (context, index) => CategoryItem(
+                  name: category[index],
+                  onTap: function[index],
                 ),
-                itemCount: products.length,
+                itemCount: category.length,
               );
             } else {
               return const Center(
