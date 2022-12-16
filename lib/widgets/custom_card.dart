@@ -51,9 +51,7 @@ class _CustomCardState extends State<CustomCard> {
                       fontSize: 14.sp,
                     ),
                   ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
